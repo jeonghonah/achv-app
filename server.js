@@ -31,8 +31,8 @@ app.get('/about', function(req, res){
 });
 
 app.post('/_action', function(req, res){
-  var minute = 60 * 1000;
-  if (req.body.username) res.cookie('username', req.body.username, { maxAge: minute });
+  var year = 60 * 1000 * 60 * 24 * 365;
+  if (req.body.username) res.cookie('username', req.body.username, { maxAge: year });
   res.redirect('back');
 });
 
