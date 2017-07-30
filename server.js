@@ -21,7 +21,7 @@ app.get('/user', function(req, res){
   getUserpage(req, res);
 });
 
-app.get('/hall', function(req, res){
+app.get('/hof', function(req, res){
   getHallpage(req, res);
 });
 
@@ -56,11 +56,20 @@ function getRootpage(req, res)
     console.log('redis connected');
   });
 
-  client.get("system", function(err, reply) {
-		res.render('pages/index', {
-			username: username, 
-			notice: reply /* html variable */
-		});
+  client.mget(["weekly_news", "notice"], function(err, vals) {
+
+    var news = JSON.parse(vals[0]);
+    var news_cnt = news.length;
+    var notice = JSON.parse(vals[1]);
+    var notice_cnt = notice.length;
+
+    res.render('pages/index', {
+      username: username, 
+      news: news,
+      news_cnt: news_cnt,
+      notice: notice,
+      notice_cnt: notice_cnt,
+    });
   });
 
   client.quit();
@@ -106,10 +115,10 @@ function getHallpage(req, res)
     console.log('redis connected');
   });
 
-  client.get(username, function(err, reply) {
-		res.render('pages/hall', {
+  client.get("halloffame", function(err, reply) {
+		res.render('pages/hof', {
 			username: username, 
-			attend: reply /* html variable */
+			notice: reply /* html variable */
 		});
   });
 

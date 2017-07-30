@@ -13,8 +13,29 @@
 
     <main>
         <div class="jumbotron">
-            <h2>Weekly Notice</h2>
-            <p><%= notice %></p>
+            <h3><span class="badge badge-success">Weekly News
+            <span class="badge badge-pill badge-danger"><%= news_cnt %></span></span>
+            </h3>
+            <br/>
+            <% for(var i=0; i<news.length; i++) { %>
+                <p>
+                <%= news[i] %>
+                </p>
+                <hr>
+            <% } %>
+        </div>
+
+        <div class="jumbotron">
+            <h3><span class="badge badge-success">Notice
+            <span class="badge badge-pill badge-danger"><%= notice_cnt %></span></span>
+            </h3>
+            <br/>
+            <% for(var i=0; i<notice.length; i++) { %>
+                <p>
+                <%= notice[i] %>
+                </p>
+                <hr>
+            <% } %>
         </div>
     </main>
 
